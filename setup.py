@@ -20,7 +20,7 @@ except ImportError:
 setup(
     name = 'BabelDjango',
     description = 'Utilities for using Babel in Django',
-    version = '0.1',
+    version = '0.2',
     license = 'BSD',
     author  = 'Edgewall Software',
     author_email = 'python-babel@googlegroups.com',

@@ -12,6 +12,7 @@
 # history and logs, available at http://babel.edgewall.org/log/.
 
 from babel import Locale, UnknownLocaleError
+from django.conf import settings
 try:
     from threading import local
 except ImportError:
@@ -37,7 +38,8 @@ class LocaleMiddleware(object):
 
     def process_request(self, request):
         try:
-            locale = Locale.parse(request.LANGUAGE_CODE, sep='-')
+            code = getattr(request, 'LANGUAGE_CODE', settings.LANGUAGE_CODE)
+            locale = Locale.parse(code, sep='-')
         except (ValueError, UnknownLocaleError):
             pass
         else:

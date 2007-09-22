@@ -82,6 +82,8 @@ def extract_django(fileobj, keywords, comment_tags, options):
                         g = g.strip("'")
                     yield lineno, None, unicode(g), []
                 elif bmatch:
+                    for fmatch in constant_re.findall(t.contents):
+                        yield lineno, None, unicode(fmatch), []
                     intrans = True
                     inplural = False
                     singular = []

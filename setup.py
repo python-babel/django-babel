@@ -26,7 +26,7 @@ setup(
     author_email = 'python-babel@googlegroups.com',
     url = 'http://babel.edgewall.org/wiki/BabelDjango',
 
-    packages = ['babeldjango'],
+    packages = ['babeldjango', 'babeldjango.templatetags'],
     install_requires = ['Babel'],
 
     entry_points = """

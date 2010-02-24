@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2007 Edgewall Software
+# Copyright (C) 2007-2010 Edgewall Software
 # All rights reserved.
 #
 # This software is licensed as described in the file COPYING, which
@@ -12,7 +12,7 @@
 # history and logs, available at http://babel.edgewall.org/log/.
 
 from babel import Locale, UnknownLocaleError
-from django.conf import settings
+from django.utils.translation import get_language
 try:
     from threading import local
 except ImportError:
@@ -38,7 +38,7 @@ class LocaleMiddleware(object):
 
     def process_request(self, request):
         try:
-            code = getattr(request, 'LANGUAGE_CODE', settings.LANGUAGE_CODE)
+            code = getattr(request, 'LANGUAGE_CODE', get_language())
             locale = Locale.parse(code, sep='-')
         except (ValueError, UnknownLocaleError):
             pass

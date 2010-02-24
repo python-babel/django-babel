@@ -13,7 +13,7 @@
 
 from django.conf import settings
 from django.template import Library
-from django.utils.translation import to_locale
+from django.utils.translation import to_locale, get_language
 try:
     from pytz import timezone
 except ImportError:
@@ -30,7 +30,7 @@ register = Library()
 def _get_format():
     locale = get_current_locale()
     if not locale:
-        locale = Locale.parse(to_locale(settings.LANGUAGE_CODE))
+        locale = Locale.parse(to_locale(get_language()))
     if timezone:
         tzinfo = timezone(settings.TIME_ZONE)
     else:

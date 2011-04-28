@@ -13,8 +13,6 @@
 
 from babel.core import *
 
-from django.conf import settings
-settings.configure(USE_I18N=True)
 from django.template import Lexer, TOKEN_TEXT, TOKEN_VAR, TOKEN_BLOCK
 from django.utils.translation.trans_real import inline_re, block_re, \
                                                 endblock_re, plural_re, \

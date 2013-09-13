@@ -9,7 +9,7 @@ except ImportError:
 setup(
     name = 'BabelDjango',
     description = 'Utilities for using Babel in Django',
-    version = '1.0',
+    version = '1.0-dev',
     license = 'BSD',
     author  = 'Christopher Lenz',
     author_email = 'cmlenz@gmail.com',
@@ -19,13 +19,12 @@ setup(
     install_requires = ['Babel'],
 
     classifiers=[
-        'Development Status :: 5 - Production/Stable',
+        'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 3',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
 

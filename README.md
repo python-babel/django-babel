@@ -95,7 +95,8 @@ gets updated.
 Then, you run the `pybabel update` command to merge the changes into the
 translation catalogs:
 
-```bash $ pybabel update -D django -i mypkg/locale/django.pot -d mypkg/locale
+```bash
+$ pybabel update -D django -i mypkg/locale/django.pot -d mypkg/locale
 ```
 
 This will update all the `.po` files found in the `mypkg/locale` directory.

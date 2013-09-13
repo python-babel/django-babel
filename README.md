@@ -19,7 +19,7 @@ needs to be in your project package directory.
 
 ### Extraction Method Mapping
 
-So `django-babel` comes with an extraction method plugin that can extract
+So BabelDjango comes with an extraction method plugin that can extract
 localizable messages from Django template files. Python is supported out of the
 box by Babel. To use this extraction functionality, create a file called
 `babel.cfg` in your project directory (the directory above your project
@@ -41,7 +41,7 @@ Also, any files with the extension `.py` inside your package directory (replace
 “mypkg” with the actual name of your Django project package) are processed by
 the “python” extraction method.
 
-If you don't use setuptools, or for some reason haven't installed !BabelDjango
+If you don't use setuptools, or for some reason haven't installed BabelDjango
 using setuptools/pip, you'll need to define what function the extraction method
 “django” maps to. This is done in an extra section at the top of the
 configuration file:
@@ -148,12 +148,12 @@ locale from a thread-local cache.
 
 ## Using the Template Tags
 
-The template filters provided by !BabelDjango allow formatting of date/time and
+The template filters provided by BabelDjango allow formatting of date/time and
 number values in a locale-sensitive manner, providing much more powerful
 alternatives to the `date`, `time`, and `floatformat` filters that come with
 Django.
 
-To make the template filters/tags available, you need to add !BabelDjango to
+To make the template filters/tags available, you need to add BabelDjango to
 the list of `INSTALLED_APPS` in your settings module:
 
 ```python
@@ -165,7 +165,7 @@ INSTALLED_APPS = (
 ```
 
 And in every template you want to use the filters, you need to explicitly load
-the !BabelDjango library:
+the BabelDjango library:
 
 ```jinja
 {% load babel %}

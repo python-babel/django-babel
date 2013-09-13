@@ -17,7 +17,8 @@ Babel provides a message extraction framework similar to GNU `xgettext`, but mor
 So !BabelDjango comes with an extraction method plugin that can extract localizable messages from Django template files. Python is supported out of the box by Babel. To use this extraction functionality, create a file called `babel.cfg` in your project directory (the directory above your project package), with the content:
 
 ```ini
-[django: templates/**.*, mypkg/*/templates/**.*]
+[django: templates/**.*]
+[django: mypkg/*/templates/**.*]
 [python: mypkg/**.py]
 ```
 
@@ -25,11 +26,20 @@ This instructs Babel to look for any files in the top-level `templates` director
 
 Also, any files with the extension `.py` inside your package directory (replace “mypkg” with the actual name of your Django project package) are processed by the “python” extraction method.
 
-If you don't use setuptools, or for some reason haven't installed !BabelDjango using setuptools/easy_install, you'll need to define what function the extraction method “django” maps to. This is done in an extra section at the top of the configuration file:
+If you don't use setuptools, or for some reason haven't installed !BabelDjango using setuptools/pip, you'll need to define what function the extraction method “django” maps to. This is done in an extra section at the top of the configuration file:
 
 ```ini
 [extractors]
 django = babeldjango.extract:extract_django
+```
+
+The encoding of the templates is assumed to be UTF-8. If you are using a
+different encoding, you will need to specify it in the configuration. For
+example:
+
+```ini
+[django: templates/**.*]
+encoding = iso-8859-1
 ```
 
 ### Running the Extraction Process

@@ -26,7 +26,11 @@ def extract_django(fileobj, keywords, comment_tags, options):
     singular = []
     plural = []
     lineno = 1
-    for t in Lexer(fileobj.read(), None).tokenize():
+
+    encoding = options.get('encoding', 'utf8')
+    text = fileobj.read().decode(encoding)
+
+    for t in Lexer(text, None).tokenize():
         lineno += t.contents.count('\n')
         if intrans:
             if t.token_type == TOKEN_BLOCK:

@@ -1,15 +1,4 @@
 # -*- coding: utf-8 -*-
-#
-# Copyright (C) 2007 Edgewall Software
-# All rights reserved.
-#
-# This software is licensed as described in the file COPYING, which
-# you should have received as part of this distribution. The terms
-# are also available at http://babel.edgewall.org/wiki/License.
-#
-# This software consists of voluntary contributions made by many
-# individuals. For the exact contribution history, see the revision
-# history and logs, available at http://babel.edgewall.org/log/.
 
 from django.conf import settings
 from django.template import Library
@@ -27,6 +16,7 @@ Locale = babel.core.Locale
 
 register = Library()
 
+
 def _get_format():
     locale = get_current_locale()
     if not locale:
@@ -37,34 +27,42 @@ def _get_format():
         tzinfo = None
     return Format(locale, tzinfo)
 
+
+@register.filter
 def datefmt(date=None, format='medium'):
     return _get_format().date(date, format=format)
-datefmt = register.filter(datefmt)
 
+
+@register.filter
 def datetimefmt(datetime=None, format='medium'):
     return _get_format().datetime(datetime, format=format)
-datetimefmt = register.filter(datetimefmt)
 
+
+@register.filter
 def timefmt(time=None, format='medium'):
     return _get_format().time(time, format=format)
-timefmt = register.filter(timefmt)
 
+
+@register.filter
 def numberfmt(number):
     return _get_format().number(number)
-numberfmt = register.filter(numberfmt)
 
+
+@register.filter
 def decimalfmt(number, format=None):
     return _get_format().decimal(number, format=format)
-decimalfmt = register.filter(decimalfmt)
 
+
+@register.filter
 def currencyfmt(number, currency):
     return _get_format().currency(number, currency)
-currencyfmt = register.filter(currencyfmt)
 
+
+@register.filter
 def percentfmt(number, format=None):
     return _get_format().percent(number, format=format)
-percentfmt = register.filter(percentfmt)
 
+
+@register.filter
 def scientificfmt(number):
     return _get_format().scientific(number)
-scientificfmt = register.filter(scientificfmt)

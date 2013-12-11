@@ -12,7 +12,7 @@
 # individuals. For the exact contribution history, see the revision
 # history and logs, available at http://babel.edgewall.org/log/.
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name = 'django-babel',
@@ -22,8 +22,9 @@ setup(
     author  = 'Edgewall Software',
     author_email = 'python-babel@googlegroups.com',
     url = 'http://github.com/graingert/django-babel/',
-
-    packages = ['babeldjango', 'babeldjango.templatetags'],
+    packages = find_packages(
+        exclude=["*.tests", "*.tests.*", "tests.*", "tests"],
+    ),
     install_requires = ['Babel'],
 
     entry_points = """

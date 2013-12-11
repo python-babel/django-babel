@@ -17,7 +17,7 @@ from setuptools import setup
 setup(
     name = 'django-babel',
     description = 'Utilities for using Babel in Django',
-    version = '0.2.3',
+    version='0.3.0.dev0',
     license = 'BSD',
     author  = 'Edgewall Software',
     author_email = 'python-babel@googlegroups.com',

@@ -4,7 +4,7 @@ Changes
 0.3.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- fix relative import in template tags
 
 
 0.3.0 (2013-12-11)

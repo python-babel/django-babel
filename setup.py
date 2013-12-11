@@ -12,19 +12,16 @@
 # individuals. For the exact contribution history, see the revision
 # history and logs, available at http://babel.edgewall.org/log/.
 
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+from setuptools import setup
 
 setup(
-    name = 'BabelDjango',
+    name = 'django-babel',
     description = 'Utilities for using Babel in Django',
     version = '0.2.3',
     license = 'BSD',
     author  = 'Edgewall Software',
     author_email = 'python-babel@googlegroups.com',
-    url = 'http://babel.edgewall.org/wiki/BabelDjango',
+    url = 'http://github.com/graingert/django-babel/',
 
     packages = ['babeldjango', 'babeldjango.templatetags'],
     install_requires = ['Babel'],

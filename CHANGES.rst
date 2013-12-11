@@ -1,7 +1,7 @@
 Changes
 =========
 
-0.3.1 (unreleased)
+0.3.1 (2013-12-11)
 ------------------
 
 - fix relative import in template tags

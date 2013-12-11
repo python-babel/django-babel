@@ -1,10 +1,10 @@
 Changes
 =========
 
-0.3.0 (unreleased)
+0.3.0 (2013-12-11)
 ------------------
 
-- Nothing changed yet.
+- Rename package to django_babel
 
 
 0.2.3 (2013-12-11)

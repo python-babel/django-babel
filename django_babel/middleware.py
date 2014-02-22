@@ -23,6 +23,7 @@ def get_current_locale():
 
 
 class LocaleMiddleware(object):
+
     """Simple Django middleware that makes available a Babel `Locale` object
     via the `request.locale` attribute.
     """

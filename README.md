@@ -200,7 +200,7 @@ would render: **4/1/07**, and
 
 would render: **Sun, Apr 01 2007 AD**
 
-### `datetimefmt` 
+### `datetimefmt`
 
 Renders a string representation of a date and time.
 

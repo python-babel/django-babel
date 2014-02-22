@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
-from babel.core import *
-
 from django.template import Lexer, TOKEN_TEXT, TOKEN_VAR, TOKEN_BLOCK
-from django.utils.translation.trans_real import inline_re, block_re, \
-                                                endblock_re, plural_re, \
-                                                constant_re
+from django.utils.translation.trans_real import (
+    inline_re, block_re, endblock_re, plural_re, constant_re)
 
 
 def extract_django(fileobj, keywords, comment_tags, options):
@@ -89,7 +86,7 @@ def extract_django(fileobj, keywords, comment_tags, options):
                     yield lineno, None, unicode(cmatch.group(1)), []
                 for p in parts[1:]:
                     if p.find(':_(') >= 0:
-                        p1 = p.split(':',1)[1]
+                        p1 = p.split(':', 1)[1]
                         if p1[0] == '_':
                             p1 = p1[1:]
                         if p1[0] == '(':

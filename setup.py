@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 setup(
@@ -12,9 +12,7 @@ setup(
     author='Christopher Lenz',
     author_email='cmlenz@gmail.com',
     url='http://github.com/graingert/django-babel/',
-    packages=find_packages(
-        exclude=["*.tests", "*.tests.*", "tests.*", "tests"],
-    ),
+    packages=find_packages(exclude=('tests',)),
     install_requires=['Babel'],
     classifiers=[
         'Development Status :: 4 - Beta',
@@ -25,7 +23,7 @@ setup(
         'Programming Language :: Python',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
-    entry_points = """
+    entry_points="""
     [babel.extractors]
     django = babeldjango.extract:extract_django
     """,

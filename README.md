@@ -1,6 +1,7 @@
-# Tools for using Babel with Django
+Tools for using Babel with Django
+=================================
 
-This package contains various utilities for integration of [Babel][] into the
+This package contains various utilities for integration of `Babel`_ into the
 [Django][] web framework:
 
  * A message extraction plugin for Django templates.

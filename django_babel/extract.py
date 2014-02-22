@@ -1,22 +1,11 @@
 # -*- coding: utf-8 -*-
-#
-# Copyright (C) 2007 Edgewall Software
-# All rights reserved.
-#
-# This software is licensed as described in the file COPYING, which
-# you should have received as part of this distribution. The terms
-# are also available at http://babel.edgewall.org/wiki/License.
-#
-# This software consists of voluntary contributions made by many
-# individuals. For the exact contribution history, see the revision
-# history and logs, available at http://babel.edgewall.org/log/.
-
 from babel.core import *
 
 from django.template import Lexer, TOKEN_TEXT, TOKEN_VAR, TOKEN_BLOCK
 from django.utils.translation.trans_real import inline_re, block_re, \
                                                 endblock_re, plural_re, \
                                                 constant_re
+
 
 def extract_django(fileobj, keywords, comment_tags, options):
     """Extract messages from Django template files.
@@ -36,7 +25,11 @@ def extract_django(fileobj, keywords, comment_tags, options):
     singular = []
     plural = []
     lineno = 1
-    for t in Lexer(fileobj.read(), None).tokenize():
+
+    encoding = options.get('encoding', 'utf8')
+    text = fileobj.read().decode(encoding)
+
+    for t in Lexer(text, None).tokenize():
         lineno += t.contents.count('\n')
         if intrans:
             if t.token_type == TOKEN_BLOCK:

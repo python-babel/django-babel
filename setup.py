@@ -5,11 +5,11 @@ from setuptools import setup, find_packages
 from setuptools.command.test import test as TestCommand
 
 
-with open('README.md') as fobj:
+with open('README.md', 'rb') as fobj:
     readme = fobj.read()
 
 
-with open('CHANGES.md') as fobj:
+with open('CHANGES.md', 'rb') as fobj:
     history = fobj.read()
 
 

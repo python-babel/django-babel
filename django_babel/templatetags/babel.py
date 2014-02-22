@@ -8,7 +8,7 @@ try:
 except ImportError:
     timezone = None
 
-from ..middleware import get_current_locale
+from django_babel.middleware import get_current_locale
 
 babel = __import__('babel', {}, {}, ['core', 'support'])
 Format = babel.support.Format

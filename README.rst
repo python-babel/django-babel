@@ -242,7 +242,7 @@ would render: **Sun, Apr 01 2007 AD - 15:30:00**
 
 Renders a string representation of a time.
 
-* *Input**:  ``datetime.datetime``, ``datetime.time``, or a float/int timestamp
+* **Input**:  ``datetime.datetime``, ``datetime.time``, or a float/int timestamp
 * **Parameters**:  the format name or pattern (optional)
 
 Examples:

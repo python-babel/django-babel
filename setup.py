@@ -1,16 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import os
 import sys
+import codecs
 from setuptools import setup, find_packages
 from setuptools.command.test import test as TestCommand
 
 
-with open('README.md', 'rb') as fobj:
-    readme = fobj.read()
-
-
-with open('CHANGES.md', 'rb') as fobj:
-    history = fobj.read()
+def read(*parts):
+    filename = os.path.join(os.path.dirname(__file__), *parts)
+    with codecs.open(filename, encoding='utf-8') as fp:
+        return fp.read()
 
 
 test_requires = [
@@ -50,7 +50,7 @@ class PyTest(TestCommand):
 setup(
     name='django-babel',
     description='Utilities for using Babel in Django',
-    long_description=readme + '\n\n' + history,
+    long_description=read('README.rst') + u'\n\n' + read('CHANGES.rst'),
     version='1.0-dev',
     license='BSD',
     author='Christopher Lenz',

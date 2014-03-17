@@ -40,7 +40,7 @@ def extract_django(fileobj, keywords, comment_tags, options):
                             'ngettext',
                             (smart_unicode(u''.join(singular)),
                              smart_unicode(u''.join(plural))),
-                            []
+                            [])
                     else:
                         yield (
                             lineno,

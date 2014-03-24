@@ -31,6 +31,16 @@ class ExtractDjangoTestCase(unittest.TestCase):
         messages = list(extract_django(buf, extract.DEFAULT_KEYWORDS.keys(), [], {}))
         self.assertEqual([(1, None, u'xxx%(anton)sxxx', [])], messages)
 
+    def test_extract_unicode(self):
+        buf = BytesIO(b'{% trans "@ſðæ314“ſſ¶ÐĐÞ→SÆ^ĸŁ" %}')
+        messages = list(extract_django(buf, extract.DEFAULT_KEYWORDS.keys(), [], {}))
+        self.assertEqual([(1, None, u'@ſðæ314“ſſ¶ÐĐÞ→SÆ^ĸŁ', [])], messages)
+
+    def test_extract_unicode_blocktrans(self):
+        buf = BytesIO(b'{% blocktrans %}@ſðæ314“ſſ¶ÐĐÞ→SÆ^ĸŁ{% endblocktrans %}')
+        messages = list(extract_django(buf, extract.DEFAULT_KEYWORDS.keys(), [], {}))
+        self.assertEqual([(1, None, u'@ſðæ314“ſſ¶ÐĐÞ→SÆ^ĸŁ', [])], messages)
+
     # TODO: Yet expected to not extract the comments.
     def test_extract_ignored_comment(self):
         buf = BytesIO(b'{# ignored comment #1 #}{% trans "Translatable literal #9a" %}')

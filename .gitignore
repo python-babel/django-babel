@@ -1,4 +1,5 @@
 build
 dist
 *.pyc
-BabelDjango.egg-info
+django_babel.egg-info
+.tox

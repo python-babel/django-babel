@@ -80,8 +80,9 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',
     ],
-    entry_points="""
-    [babel.extractors]
-    django = babeldjango.extract:extract_django
-    """,
+    entry_points={
+        'babel.extractors': [
+            'django = babeldjango.extract:extract_django',
+        ]
+    }
 )

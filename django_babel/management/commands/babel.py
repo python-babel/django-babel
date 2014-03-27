@@ -28,6 +28,8 @@ class Command(LabelCommand):
 
         if command == 'makemessages':
             self.handle_makemessages(**options)
+        if command == 'compilemessages':
+            self.handle_compilemessages(**options)
 
     def handle_makemessages(self, **options):
         locale_paths = list(settings.LOCALE_PATHS)
@@ -70,3 +72,15 @@ class Command(LabelCommand):
                       '-l', locale]
                 print cmd
                 call(cmd)
+
+    def handle_compilemessages(self, **options):
+        locale_paths = list(settings.LOCALE_PATHS)
+        domain = options.pop('domain')
+        locales = options.pop('locale')
+
+        for path in locale_paths:
+            for locale in locales:
+                po_file = os.path.join(path, locale, 'LC_MESSAGES', domain + '.po')
+                if os.path.exists(po_file):
+                    cmd = ['pybabel', 'compile', '-D', domain, '-d', path, '-l', locale]
+                    call(cmd)

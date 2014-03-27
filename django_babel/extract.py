@@ -35,18 +35,11 @@ def extract_django(fileobj, keywords, comment_tags, options):
                 pluralmatch = plural_re.match(t.contents)
                 if endbmatch:
                     if inplural:
-                        yield (
-                            lineno,
-                            'ngettext',
-                            (smart_unicode(u''.join(singular)),
-                             smart_unicode(u''.join(plural))),
-                            [])
+                        yield lineno, 'ngettext', (smart_unicode(u''.join(singular)),
+                                                   smart_unicode(u''.join(plural))), []
                     else:
-                        yield (
-                            lineno,
-                            None,
-                            smart_unicode(u''.join(singular)),
-                            [])
+                        yield lineno, None, smart_unicode(u''.join(singular)), []
+
                     intrans = False
                     inplural = False
                     singular = []

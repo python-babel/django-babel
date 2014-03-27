@@ -32,7 +32,6 @@ dev_requires = [
 ]
 
 
-
 class PyTest(TestCommand):
 
     def finalize_options(self):

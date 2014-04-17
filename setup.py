@@ -17,6 +17,8 @@ test_requires = [
     'coverage',
     'pytest',
     'pytest-cov>=1.4',
+    'pytest-flakes',
+    'pytest-pep8',
     'python-coveralls',
 ]
 

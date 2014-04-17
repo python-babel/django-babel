@@ -62,7 +62,6 @@ class Command(LabelCommand):
 
             cmd.append(os.path.dirname(path))
 
-            print cmd
             call(cmd)
 
             for locale in locales:
@@ -70,7 +69,6 @@ class Command(LabelCommand):
                       '-i', os.path.join(path, '%s.pot' % domain),
                       '-d', path,
                       '-l', locale]
-                print cmd
                 call(cmd)
 
     def handle_compilemessages(self, **options):

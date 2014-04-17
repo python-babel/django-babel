@@ -1,11 +1,9 @@
 #-*- coding: utf-8 -*-
-import codecs
-import sys
 import unittest
 
 from django_babel.extract import extract_django
 from babel.messages import extract
-from babel._compat import BytesIO, StringIO
+from babel._compat import BytesIO
 
 
 class ExtractDjangoTestCase(unittest.TestCase):

@@ -45,8 +45,8 @@ class Command(LabelCommand):
         if mapping_file is None and 'extract_messages' in distribution.command_options:
             opts = distribution.command_options['extract_messages']
             try:
-                mapping_file = opts.get('mapping_file', ())[1]
-            except IndexError:
+                mapping_file = opts['mapping_file'][1]
+            except (IndexError, KeyError):
                 mapping_file = None
 
         for path in locale_paths:
@@ -54,8 +54,7 @@ class Command(LabelCommand):
             if not os.path.exists(potfile):
                 continue
 
-            cmd = ['pybabel', 'extract', '-o',
-                   os.path.join(path, '%s.pot' % domain)]
+            cmd = ['pybabel', 'extract', '-o', potfile]
 
             if mapping_file is not None:
                 cmd.extend(['-F', mapping_file])
@@ -66,7 +65,7 @@ class Command(LabelCommand):
 
             for locale in locales:
                 cmd = ['pybabel', 'update', '-D', domain,
-                      '-i', os.path.join(path, '%s.pot' % domain),
+                      '-i', potfile,
                       '-d', path,
                       '-l', locale]
                 call(cmd)

@@ -14,8 +14,18 @@ default_keys = extract.DEFAULT_KEYWORDS.keys()
 class ExtractDjangoTestCase(unittest.TestCase):
     # TODO: translator comments are not yet supported!
 
-    def test_extract_simple(self):
+    def test_extract_no_tags(self):
+        buf = BytesIO(b'nothing')
+        messages = list(extract_django(buf, default_keys, [], {}))
+        self.assertEqual([], messages)
+
+    def test_extract_simple_double_quotes(self):
         buf = BytesIO(b'{% trans "Bunny" %}')
+        messages = list(extract_django(buf, default_keys, [], {}))
+        self.assertEqual([(1, None, u'Bunny', [])], messages)
+
+    def test_extract_simple_single_quotes(self):
+        buf = BytesIO(b"{% trans 'Bunny' %}")
         messages = list(extract_django(buf, default_keys, [], {}))
         self.assertEqual([(1, None, u'Bunny', [])], messages)
 
@@ -69,3 +79,40 @@ class ExtractDjangoTestCase(unittest.TestCase):
         buf = BytesIO(b'{% blocktrans %}{% other_tag %}{% endblocktrans %}')
         gen = extract_django(buf, default_keys, [], {})
         pytest.raises(SyntaxError, gen.next)
+
+    def test_extract_var(self):
+        buf = BytesIO(b'{{ book }}')
+        messages = list(extract_django(buf, default_keys, [], {}))
+        self.assertEqual([], messages)
+
+    def test_extract_filters_default_translatable(self):
+        buf = BytesIO(b'{{ book.author|default:_("Unknown") }}')
+        messages = list(extract_django(buf, default_keys, [], {}))
+        self.assertEqual([(1, None, u'Unknown', [])], messages)
+
+    def test_extract_filters_default_translatable_single_quotes(self):
+        buf = BytesIO(b"{{ book.author|default:_('Unknown') }}")
+        messages = list(extract_django(buf, default_keys, [], {}))
+        self.assertEqual([(1, None, u'Unknown', [])], messages)
+
+    def test_extract_constant_single_quotes(self):
+        buf = BytesIO(b"{{ _('constant') }}")
+        messages = list(extract_django(buf, default_keys, [], {}))
+        self.assertEqual([(1, None, u"'constant'", [])], messages)
+
+    def test_extract_constant_single_quotes(self):
+        buf = BytesIO(b'{{ _("constant") }}')
+        messages = list(extract_django(buf, default_keys, [], {}))
+        self.assertEqual([(1, None, u'"constant"', [])], messages)
+
+    def test_extract_constant_block(self):
+        buf = BytesIO(b'{% _("constant") %}')
+        messages = list(extract_django(buf, default_keys, [], {}))
+        self.assertEqual([(1, None, u'"constant"', [])], messages)
+
+    def test_extract_constant_in_block(self):
+        buf = BytesIO(b'{% blocktrans foo=_("constant") %}{{ foo }}{% endblocktrans %}')
+        messages = list(extract_django(buf, default_keys, [], {}))
+        self.assertEqual(
+            [(1, None, u'"constant"', []), (1, None, u'%(foo)s', [])],
+            messages)

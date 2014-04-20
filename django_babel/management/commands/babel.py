@@ -72,9 +72,9 @@ class Command(LabelCommand):
 
             for locale in locales:
                 cmd = ['pybabel', 'update', '-D', domain,
-                      '-i', potfile,
-                      '-d', os.path.relpath(path),
-                      '-l', locale]
+                       '-i', potfile,
+                       '-d', os.path.relpath(path),
+                       '-l', locale]
                 call(cmd)
 
     def handle_compilemessages(self, **options):

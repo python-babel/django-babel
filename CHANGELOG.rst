@@ -28,3 +28,6 @@ Changelog
 
 * Rename package on PyPI
 * Use GitHub as source control
+
+
+.. _`master`: https://github.com/graingert/django-babel

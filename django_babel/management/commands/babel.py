@@ -13,18 +13,24 @@ class Command(LabelCommand):
     args = '[makemessages] [compilemessages]'
 
     option_list = LabelCommand.option_list + (
-        make_option('--locale', '-l', default=None, dest='locale', action='append',
-            help='Creates or updates the message files for the given locale(s) (e.g. pt_BR). '
-                 'Can be used multiple times.'),
-        make_option('--domain', '-d', default='django', dest='domain',
+        make_option(
+            '--locale', '-l',
+            default=None, dest='locale', action='append',
+            help='Creates or updates the message files for the given locale(s)'
+                 ' (e.g pt_BR). Can be used multiple times.'),
+        make_option('--domain', '-d',
+            default='django', dest='domain',
             help='The domain of the message files (default: "django").'),
-        make_option('--mapping-file', '-F', default=None, dest='mapping_file',
+        make_option('--mapping-file', '-F',
+            default=None, dest='mapping_file',
             help='Mapping file')
     )
 
     def handle_label(self, command, **options):
         if command not in ('makemessages', 'compilemessages'):
-            raise CommandError("You must either apply 'makemessages' or 'compilemessages'")
+            raise CommandError(
+                "You must either apply 'makemessages' or 'compilemessages'"
+            )
 
         if command == 'makemessages':
             self.handle_makemessages(**options)
@@ -42,7 +48,8 @@ class Command(LabelCommand):
         distribution.parse_config_files(distribution.find_config_files())
 
         mapping_file = options.pop('mapping_file', None)
-        if mapping_file is None and 'extract_messages' in distribution.command_options:
+        has_extract = 'extract_messages' in distribution.command_options
+        if mapping_file is None and has_extract:
             opts = distribution.command_options['extract_messages']
             try:
                 mapping_file = opts['mapping_file'][1]
@@ -77,7 +84,10 @@ class Command(LabelCommand):
 
         for path in locale_paths:
             for locale in locales:
-                po_file = os.path.join(path, locale, 'LC_MESSAGES', domain + '.po')
+                po_file = os.path.join(
+                    path, locale, 'LC_MESSAGES', domain + '.po'
+                )
                 if os.path.exists(po_file):
-                    cmd = ['pybabel', 'compile', '-D', domain, '-d', path, '-l', locale]
+                    cmd = ['pybabel', 'compile', '-D', domain,
+                           '-d', path, '-l', locale]
                     call(cmd)

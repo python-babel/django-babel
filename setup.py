@@ -38,7 +38,7 @@ class PyTest(TestCommand):
 
     def finalize_options(self):
         TestCommand.finalize_options(self)
-        self.test_args = ['tests']
+        self.test_args = []
         self.test_suite = True
 
     def run_tests(self):
@@ -51,7 +51,7 @@ class PyTest(TestCommand):
 setup(
     name='django-babel',
     description='Utilities for using Babel in Django',
-    long_description=read('README.rst') + u'\n\n' + read('CHANGES.rst'),
+    long_description=read('README.rst') + u'\n\n' + read('CHANGELOG.rst'),
     version='1.0-dev',
     license='BSD',
     author='Christopher Lenz',

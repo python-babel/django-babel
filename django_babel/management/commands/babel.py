@@ -66,14 +66,14 @@ class Command(LabelCommand):
             if mapping_file is not None:
                 cmd.extend(['-F', mapping_file])
 
-            cmd.append(os.path.dirname(path))
+            cmd.append(os.path.dirname(os.path.relpath(path)))
 
             call(cmd)
 
             for locale in locales:
                 cmd = ['pybabel', 'update', '-D', domain,
                       '-i', potfile,
-                      '-d', path,
+                      '-d', os.path.relpath(path),
                       '-l', locale]
                 call(cmd)
 

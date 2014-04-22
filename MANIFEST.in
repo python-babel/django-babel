@@ -1,4 +1,4 @@
-include CHANGES.rst README.rst COPYING
+include CHANGELOG.rst README.rst COPYING
 recursive-include tests *
 recursive-include docs *
 global-exclude *.pyc

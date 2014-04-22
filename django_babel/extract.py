@@ -47,6 +47,7 @@ def extract_django(fileobj, keywords, comment_tags, options):
                             None,
                             smart_unicode(u''.join(singular)),
                             [])
+
                     intrans = False
                     inplural = False
                     singular = []

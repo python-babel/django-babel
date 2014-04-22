@@ -17,6 +17,8 @@ test_requires = [
     'coverage',
     'pytest',
     'pytest-cov>=1.4',
+    'pytest-flakes',
+    'pytest-pep8',
     'python-coveralls',
 ]
 
@@ -29,15 +31,16 @@ install_requires = [
 
 dev_requires = [
     'flake8>=2.0',
+    'invoke',
+    'twine'
 ]
-
 
 
 class PyTest(TestCommand):
 
     def finalize_options(self):
         TestCommand.finalize_options(self)
-        self.test_args = ['tests']
+        self.test_args = []
         self.test_suite = True
 
     def run_tests(self):
@@ -50,7 +53,7 @@ class PyTest(TestCommand):
 setup(
     name='django-babel',
     description='Utilities for using Babel in Django',
-    long_description=read('README.rst') + u'\n\n' + read('CHANGES.rst'),
+    long_description=read('README.rst') + u'\n\n' + read('CHANGELOG.rst'),
     version='1.0-dev',
     license='BSD',
     author='Christopher Lenz',
@@ -74,11 +77,15 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Topic :: Software Development :: Libraries :: Python Modules',
+        'Framework :: Django',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: Implementation :: PyPy',
+        'Programming Language :: Python :: Implementation :: CPython',
     ],
     entry_points={
         'babel.extractors': [

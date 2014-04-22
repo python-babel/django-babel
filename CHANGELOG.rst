@@ -6,9 +6,14 @@ Changelog
 
 .. note:: This version is not yet released and is under active development.
 
+
+0.3.2 - 2014-04-22
+------------------
+
 * Initial testing infrastructure
 * Add management command `babel` with `makemessages` and `compilemessages`
   labels. Mimics django's `makemessages` and `compilemessages` commands.
+* Various unicode fixes
 
 
 0.3.1 - 2013-12-11

@@ -7,6 +7,12 @@ Changelog
 .. note:: This version is not yet released and is under active development.
 
 
+0.3.3 - 2014-04-22
+------------------
+
+* Fixed release builds
+
+
 0.3.2 - 2014-04-22
 ------------------
 

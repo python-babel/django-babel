@@ -5,6 +5,10 @@ env:
   - TOX_ENV=py33-1.7.x
   - TOX_ENV=py33-1.6.x
   - TOX_ENV=py33-1.5.x
+  - TOX_ENV=py34-master
+  - TOX_ENV=py34-1.7.x
+  - TOX_ENV=py34-1.6.x
+  - TOX_ENV=py34-1.5.x
   - TOX_ENV=pypy-master
   - TOX_ENV=pypy-1.7.x
   - TOX_ENV=pypy-1.6.x

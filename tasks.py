@@ -10,6 +10,4 @@ def release(version):
     invoke.run('python setup.py sdist')
     invoke.run('python setup.py bdist_wheel')
 
-    invoke.run(
-        'twine upload -s dist/django_babel-{0]* '.format(version)
-    )
+    invoke.run('twine upload -s dist/django*babel{0}* '.format(version))

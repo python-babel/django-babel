@@ -7,6 +7,11 @@ Changelog
 .. note:: This version is not yet released and is under active development.
 
 
+0.3.4 - 2014-05-25
+------------------
+
+* Fixed django compatibility
+
 0.3.3 - 2014-04-22
 ------------------
 

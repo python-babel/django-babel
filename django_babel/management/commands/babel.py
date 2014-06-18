@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import os
 from distutils.dist import Distribution
 from optparse import make_option

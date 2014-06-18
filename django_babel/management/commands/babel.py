@@ -58,8 +58,13 @@ class Command(LabelCommand):
 
         for path in locale_paths:
             potfile = os.path.join(path, '%s.pot' % domain)
+
+            if not os.path.exists(path):
+                os.makedirs(path)
+
             if not os.path.exists(potfile):
-                continue
+                with open(potfile, 'wb') as fobj:
+                    fobj.write('')
 
             cmd = ['pybabel', 'extract', '-o', potfile]
 
@@ -71,6 +76,19 @@ class Command(LabelCommand):
             call(cmd)
 
             for locale in locales:
+                pofile = os.path.join(
+                    os.path.dirname(potfile),
+                    locale,
+                    'LC_MESSAGES',
+                    '%s.po' % domain)
+
+                if not os.path.isdir(os.path.dirname(pofile)):
+                    os.makedirs(basedir)
+
+                if not os.path.exists(pofile):
+                    with open(pofile, 'wb') as fobj:
+                        fobj.write('')
+
                 cmd = ['pybabel', 'update', '-D', domain,
                        '-i', potfile,
                        '-d', os.path.relpath(path),

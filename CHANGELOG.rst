@@ -6,6 +6,8 @@ Changelog
 
 .. note:: This version is not yet released and is under active development.
 
+* Create .po and .pot files if not existing, plus it's specific base directories.
+
 
 0.3.4 - 2014-05-25
 ------------------

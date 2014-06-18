@@ -83,7 +83,7 @@ class Command(LabelCommand):
                     '%s.po' % domain)
 
                 if not os.path.isdir(os.path.dirname(pofile)):
-                    os.makedirs(basedir)
+                    os.makedirs(os.path.dirname(pofile))
 
                 if not os.path.exists(pofile):
                     with open(pofile, 'wb') as fobj:

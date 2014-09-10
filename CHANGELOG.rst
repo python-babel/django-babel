@@ -1,10 +1,8 @@
 Changelog
 =========
 
-0.4 - `master`_
----------------
-
-.. note:: This version is not yet released and is under active development.
+0.3.5 - 2014-09-10
+------------------
 
 * Create .po and .pot files if not existing, plus it's specific base directories.
 

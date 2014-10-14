@@ -64,7 +64,7 @@ class Command(LabelCommand):
 
             if not os.path.exists(potfile):
                 with open(potfile, 'wb') as fobj:
-                    fobj.write('')
+                    fobj.write(b'')
 
             cmd = ['pybabel', 'extract', '-o', potfile]
 
@@ -87,7 +87,7 @@ class Command(LabelCommand):
 
                 if not os.path.exists(pofile):
                     with open(pofile, 'wb') as fobj:
-                        fobj.write('')
+                        fobj.write(b'')
 
                 cmd = ['pybabel', 'update', '-D', domain,
                        '-i', potfile,

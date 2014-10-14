@@ -54,7 +54,7 @@ setup(
     name='django-babel',
     description='Utilities for using Babel in Django',
     long_description=read('README.rst') + u'\n\n' + read('CHANGELOG.rst'),
-    version='0.3.7',
+    version='0.3.8',
     license='BSD',
     author='Christopher Grebs',
     author_email='cg@webshox.org',
@@ -89,7 +89,7 @@ setup(
     ],
     entry_points={
         'babel.extractors': [
-            'django = babeldjango.extract:extract_django',
+            'django = django_babel.extract:extract_django',
         ]
     }
 )

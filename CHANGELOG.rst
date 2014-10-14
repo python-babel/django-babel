@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.3.8 - 2014-10-14
+------------------
+
+* Fix old reference to `babeldjango` module in entry points.
+
 0.3.7 - 2014-10-14
 ------------------
 

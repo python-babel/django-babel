@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.3.7 - 2014-10-14
+------------------
+
+* Fix Python 3.x compatibility in `babel makemessages` command.
+
 0.3.6 - 2014-10-05
 ------------------
 

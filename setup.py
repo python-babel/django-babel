@@ -24,8 +24,8 @@ test_requires = [
 
 
 install_requires = [
-    'Django>=1.4,<1.8',
-    'Babel>=1.3',
+    'django>=1.4,<1.8',
+    'babel>=1.3',
 ]
 
 

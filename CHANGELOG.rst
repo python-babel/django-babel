@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.3.9 - 2014-12-24
+------------------
+
+* Fix dependencies on Django/Babel to use lower-case egg names.
+
 0.3.8 - 2014-10-14
 ------------------
 

@@ -1,10 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import os
-import sys
 import codecs
 from setuptools import setup, find_packages
-from setuptools.command.test import test as TestCommand
 
 
 def read(*parts):
@@ -24,7 +22,7 @@ test_requires = [
 
 
 install_requires = [
-    'django>=1.4,<1.8',
+    'django>=1.4,<1.9',
     'babel>=1.3',
 ]
 
@@ -34,21 +32,6 @@ dev_requires = [
     'invoke',
     'twine'
 ]
-
-
-class PyTest(TestCommand):
-
-    def finalize_options(self):
-        TestCommand.finalize_options(self)
-        self.test_args = []
-        self.test_suite = True
-
-    def run_tests(self):
-        # import here, cause outside the eggs aren't loaded
-        import pytest
-        errno = pytest.main(self.test_args)
-        sys.exit(errno)
-
 
 setup(
     name='django-babel',
@@ -62,7 +45,6 @@ setup(
     packages=find_packages(exclude=('tests',)),
     tests_require=test_requires,
     install_requires=install_requires,
-    cmdclass={'test': PyTest},
     extras_require={
         'docs': ['sphinx'],
         'tox': ['tox'],
@@ -82,7 +64,6 @@ setup(
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: Implementation :: PyPy',
         'Programming Language :: Python :: Implementation :: CPython',

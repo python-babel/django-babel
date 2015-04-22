@@ -6,6 +6,7 @@ from babel.messages import extract
 from babel._compat import BytesIO
 
 from django_babel.extract import extract_django
+from django.utils.encoding import force_bytes
 
 
 default_keys = extract.DEFAULT_KEYWORDS.keys()
@@ -45,12 +46,12 @@ class ExtractDjangoTestCase(unittest.TestCase):
         self.assertEqual([(1, None, u'xxx%(anton)sxxx', [])], messages)
 
     def test_extract_unicode(self):
-        buf = BytesIO(b'{% trans "@ſðæ314“ſſ¶ÐĐÞ→SÆ^ĸŁ" %}')
+        buf = BytesIO(force_bytes('{% trans "@ſðæ314“ſſ¶ÐĐÞ→SÆ^ĸŁ" %}'))
         messages = list(extract_django(buf, default_keys, [], {}))
         self.assertEqual([(1, None, u'@ſðæ314“ſſ¶ÐĐÞ→SÆ^ĸŁ', [])], messages)
 
     def test_extract_unicode_blocktrans(self):
-        buf = BytesIO(b'{% blocktrans %}@ſðæ314“ſſ¶ÐĐÞ→SÆ^ĸŁ{% endblocktrans %}')
+        buf = BytesIO(force_bytes('{% blocktrans %}@ſðæ314“ſſ¶ÐĐÞ→SÆ^ĸŁ{% endblocktrans %}'))
         messages = list(extract_django(buf, default_keys, [], {}))
         self.assertEqual([(1, None, u'@ſðæ314“ſſ¶ÐĐÞ→SÆ^ĸŁ', [])], messages)
 
@@ -78,7 +79,7 @@ class ExtractDjangoTestCase(unittest.TestCase):
     def test_trans_blocks_must_not_include_other_block_tags(self):
         buf = BytesIO(b'{% blocktrans %}{% other_tag %}{% endblocktrans %}')
         gen = extract_django(buf, default_keys, [], {})
-        pytest.raises(SyntaxError, gen.next)
+        pytest.raises(SyntaxError, next, gen)
 
     def test_extract_var(self):
         buf = BytesIO(b'{{ book }}')

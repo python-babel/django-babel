@@ -37,7 +37,7 @@ setup(
     name='django-babel',
     description='Utilities for using Babel in Django',
     long_description=read('README.rst') + u'\n\n' + read('CHANGELOG.rst'),
-    version='0.3.9',
+    version='0.4.0',
     license='BSD',
     author='Christopher Grebs',
     author_email='cg@webshox.org',

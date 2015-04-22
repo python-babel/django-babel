@@ -1,6 +1,14 @@
 Changelog
 =========
 
+0.4.0 - 2015-04-22
+------------------
+
+* Add compatibility for Django 1.8
+* Add compatibility for latest django master
+* Various python 3 fixes
+
+
 0.3.9 - 2014-12-24
 ------------------
 

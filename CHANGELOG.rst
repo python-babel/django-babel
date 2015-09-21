@@ -41,4 +41,4 @@ Changelog
 * Use GitHub as source control
 
 
-.. _`master`: https://github.com/graingert/django-babel
+.. _`master`: https://github.com/python-babel/django-babel

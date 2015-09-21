@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import os
-import sys
 import codecs
 from setuptools import setup, find_packages
 
@@ -12,17 +11,11 @@ def read(*parts):
         return fp.read()
 
 
-install_requires = [
-    'Django>=1.4,<1.9',
-    'Babel>=1.3',
-]
-
-
 setup(
     name='django-babel',
     description='Utilities for using Babel in Django',
     long_description=read('README.rst') + u'\n\n' + read('CHANGELOG.rst'),
-    version='0.4-dev',
+    version='0.4.0',
     license='BSD',
     author='Christopher Grebs',
     author_email='cg@webshox.org',
@@ -31,8 +24,8 @@ setup(
     url='https://github.com/python-babel/django-babel/',
     packages=find_packages(exclude=('tests',)),
     install_requires=[
-        'Django>=1.4,<1.8',
-        'Babel>=1.3',
+        'django>=1.4,<1.9',
+        'babel>=1.3',
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
@@ -47,14 +40,13 @@ setup(
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: Implementation :: PyPy',
         'Programming Language :: Python :: Implementation :: CPython',
     ],
     entry_points={
         'babel.extractors': [
-            'django = babeldjango.extract:extract_django',
+            'django = django_babel.extract:extract_django',
         ]
     }
 )

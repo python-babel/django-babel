@@ -1,11 +1,45 @@
 Changelog
 =========
 
-0.4 - `master`_
----------------
+0.4.0 - 2015-04-22
+------------------
 
-.. note:: This version is not yet released and is under active development.
+* Add compatibility for Django 1.8
+* Add compatibility for latest django master
+* Various python 3 fixes
 
+
+0.3.9 - 2014-12-24
+------------------
+
+* Fix dependencies on Django/Babel to use lower-case egg names.
+
+0.3.8 - 2014-10-14
+------------------
+
+* Fix old reference to `babeldjango` module in entry points.
+
+0.3.7 - 2014-10-14
+------------------
+
+* Fix Python 3.x compatibility in `babel makemessages` command.
+
+0.3.6 - 2014-10-05
+------------------
+
+* Django 1.7 compatibility
+
+
+0.3.5 - 2014-09-10
+------------------
+
+* Create .po and .pot files if not existing, plus it's specific base directories.
+
+
+0.3.4 - 2014-05-25
+------------------
+
+* Fixed django compatibility
 
 0.3.3 - 2014-04-22
 ------------------

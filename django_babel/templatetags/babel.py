@@ -12,6 +12,11 @@ except ImportError:
 
 from django_babel.middleware import get_current_locale
 
+__all__ = [
+    'datefmt', 'datetimefmt', 'timefmt', 'numberfmt', 'decimalfmt',
+    'currencyfmt', 'percentfmt', 'scientificfmt',
+]
+
 register = Library()
 
 

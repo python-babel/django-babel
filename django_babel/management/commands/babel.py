@@ -8,6 +8,9 @@ from django.core.management.base import LabelCommand, CommandError
 from django.conf import settings
 
 
+__all__ = ['Command']
+
+
 class Command(LabelCommand):
 
     args = '[makemessages] [compilemessages]'

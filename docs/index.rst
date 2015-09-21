@@ -15,6 +15,10 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   extract
+   management-commands
+   middleware
+   template-tags
 
 
 Indices and tables

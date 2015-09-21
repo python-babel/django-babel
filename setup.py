@@ -28,7 +28,7 @@ setup(
     author_email='cg@webshox.org',
     maintainer='Thomas Grainger',
     maintainer_email='django-babel@graingert.co.uk',
-    url='https://github.com/graingert/django-babel/',
+    url='https://github.com/python-babel/django-babel/',
     packages=find_packages(exclude=('tests',)),
     install_requires=[
         'Django>=1.4,<1.8',

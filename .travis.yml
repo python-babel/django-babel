@@ -1,5 +1,6 @@
 language: python
 python: 3.4
+sudo: false
 env:
   - TOX_ENV=py27-django15
   - TOX_ENV=py27-django16

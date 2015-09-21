@@ -2,7 +2,7 @@
 from django.template import Lexer, TOKEN_TEXT, TOKEN_VAR, TOKEN_BLOCK
 from django.utils.translation.trans_real import (
     inline_re, block_re, endblock_re, plural_re, constant_re)
-from django.utils.encoding import smart_unicode
+from django.utils.encoding import smart_text as smart_unicode
 
 
 def extract_django(fileobj, keywords, comment_tags, options):

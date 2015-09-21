@@ -176,7 +176,7 @@ the list of ``INSTALLED_APPS`` in your settings module:
         ...
         'django_babel',
         ...
-)
+    )
 
 And in every template you want to use the filters, you need to explicitly load
 the django-babel library:
@@ -294,7 +294,6 @@ Examples:
 .. code-block:: django
 
     {{ book.price|currencyfmt:"USD" }}
-```
 
 would render: **$49.90**
 

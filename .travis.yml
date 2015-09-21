@@ -1,22 +1,29 @@
 language: python
-python:
-  - "2.6"
-  - "2.7"
-  - "3.3"
-  - "3.4"
-  - "pypy"
+python: 3.4
 env:
-  - DJANGO_VERSION=master
-  - DJANGO_VERSION=1.7.x
-  - DJANGO_VERSION=1.6.x
-  - DJANGO_VERSION=1.5.x
+  - TOX_ENV=py27-django15
+  - TOX_ENV=py27-django16
+  - TOX_ENV=py27-django17
+  - TOX_ENV=py27-django18
+  - TOX_ENV=py27-djangomaster
+  - TOX_ENV=py33-django15
+  - TOX_ENV=py33-django16
+  - TOX_ENV=py33-django17
+  - TOX_ENV=py33-django18
+  - TOX_ENV=py33-djangomaster
+  - TOX_ENV=py34-django15
+  - TOX_ENV=py34-django16
+  - TOX_ENV=py34-django17
+  - TOX_ENV=py34-django18
+  - TOX_ENV=py34-djangomaster
+  - TOX_ENV=py26-django15
+  - TOX_ENV=py26-django16
+  - TOX_ENV=lint
+  - TOX_ENV=docs
 install:
-  - pip install tox
+- pip install tox
 script:
-  - tox -e "$TRAVIS_PYTHON_VERSION-$DJANGO_VERSION"
-matrix:
-  exclude:
-   - python: "2.6"
-     env: DJANGO_VERSION=master
-   - python: "2.6"
-     env: DJANGO_VERSION=1.7.x
+- tox -e $TOX_ENV
+cache:
+  directories:
+    - $HOME/.cache/pip

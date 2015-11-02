@@ -83,7 +83,18 @@ def extract_django(fileobj, keywords, comment_tags, options):
                         g = g.strip('"')
                     elif g[0] == "'":
                         g = g.strip("'")
-                    yield lineno, None, smart_text(g), []
+                    message_context = imatch.group(3)
+                    if message_context:
+                        # strip quotes
+                        message_context = message_context[1:-1]
+                        yield (
+                            lineno,
+                            'pgettext',
+                            [smart_text(message_context), smart_text(g)],
+                            [],
+                        )
+                    else:
+                        yield lineno, None, smart_text(g), []
                 elif bmatch:
                     for fmatch in constant_re.findall(t.contents):
                         yield lineno, None, smart_text(fmatch), []

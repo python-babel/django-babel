@@ -30,6 +30,30 @@ class ExtractDjangoTestCase(unittest.TestCase):
         messages = list(extract_django(buf, default_keys, [], {}))
         self.assertEqual([(1, None, u'Bunny', [])], messages)
 
+    def test_extract_simple_with_context_single_quotes(self):
+        buf = BytesIO(b"{% trans 'Bunny' context 'carrot' %}")
+        messages = list(extract_django(buf, default_keys, [], {}))
+        self.assertEqual([(1, 'pgettext',
+                           [u'carrot', u'Bunny'], [])], messages)
+
+    def test_extract_simple_with_context_double_quotes(self):
+        buf = BytesIO(b"{% trans 'Bunny' context \"carrot\" %}")
+        messages = list(extract_django(buf, default_keys, [], {}))
+        self.assertEqual([(1, 'pgettext',
+                           [u'carrot', u'Bunny'], [])], messages)
+
+    def test_extract_simple_with_context_with_single_quotes(self):
+        buf = BytesIO(b"{% trans 'Bunny' context \"'carrot'\" %}")
+        messages = list(extract_django(buf, default_keys, [], {}))
+        self.assertEqual([(1, 'pgettext',
+                           [u'\'carrot\'', u'Bunny'], [])], messages)
+
+    def test_extract_simple_with_context_with_double_quotes(self):
+        buf = BytesIO(b"{% trans 'Bunny' context '\"carrot\"' %}")
+        messages = list(extract_django(buf, default_keys, [], {}))
+        self.assertEqual([(1, 'pgettext',
+                           [u'"carrot"', u'Bunny'], [])], messages)
+
     def test_extract_var(self):
         buf = BytesIO(b'{% blocktrans %}{{ anton }}{% endblocktrans %}')
         messages = list(extract_django(buf, default_keys, [], {}))

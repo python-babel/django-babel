@@ -33,7 +33,14 @@ def extract_django(fileobj, keywords, comment_tags, options):
     encoding = options.get('encoding', 'utf8')
     text = fileobj.read().decode(encoding)
 
-    for t in Lexer(text, None).tokenize():
+    try:
+        text_lexer = Lexer(text)
+    except TypeError:
+        # Django 1.9 changed the way we invoke Lexer; older versions
+        # require two parameters.
+        text_lexer = Lexer(text, None)
+
+    for t in text_lexer.tokenize():
         lineno += t.contents.count('\n')
         if intrans:
             if t.token_type == TOKEN_BLOCK:

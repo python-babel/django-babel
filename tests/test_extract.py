@@ -176,3 +176,26 @@ class ExtractDjangoTestCase(unittest.TestCase):
             [(1, None, u'"constant"', []), (1, None, u'%(foo)s', [])],
             messages,
         )
+
+    def test_extract_context_in_block(self):
+        test_tmpl = (
+            b'{% blocktrans context "banana" %}{{ foo }}{% endblocktrans %}'
+        )
+        buf = BytesIO(test_tmpl)
+        messages = list(extract_django(buf, default_keys, [], {}))
+        self.assertEqual(
+            [(1, 'pgettext', [u'banana', u'%(foo)s'], [])],
+            messages,
+        )
+
+    def test_extract_context_in_plural_block(self):
+        test_tmpl = (
+            b'{% blocktrans context "banana" %}{{ foo }}'
+            b'{% plural %}{{ bar }}{% endblocktrans %}'
+        )
+        buf = BytesIO(test_tmpl)
+        messages = list(extract_django(buf, default_keys, [], {}))
+        self.assertEqual(
+            [(1, 'npgettext', [u'banana', u'%(foo)s', u'%(bar)s'], [])],
+            messages,
+        )

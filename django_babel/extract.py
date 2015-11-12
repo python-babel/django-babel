@@ -25,6 +25,7 @@ def extract_django(fileobj, keywords, comment_tags, options):
     """
     intrans = False
     inplural = False
+    message_context = None
     singular = []
     plural = []
     lineno = 1
@@ -40,21 +41,41 @@ def extract_django(fileobj, keywords, comment_tags, options):
                 pluralmatch = plural_re.match(t.contents)
                 if endbmatch:
                     if inplural:
-                        yield (
-                            lineno,
-                            'ngettext',
-                            (smart_text(u''.join(singular)),
-                             smart_text(u''.join(plural))),
-                            [])
+                        if message_context:
+                            yield (
+                                lineno,
+                                'npgettext',
+                                [smart_text(message_context),
+                                 smart_text(u''.join(singular)),
+                                 smart_text(u''.join(plural))],
+                                [],
+                            )
+                        else:
+                            yield (
+                                lineno,
+                                'ngettext',
+                                (smart_text(u''.join(singular)),
+                                 smart_text(u''.join(plural))),
+                                [])
                     else:
-                        yield (
-                            lineno,
-                            None,
-                            smart_text(u''.join(singular)),
-                            [])
+                        if message_context:
+                            yield (
+                                lineno,
+                                'pgettext',
+                                [smart_text(message_context),
+                                 smart_text(u''.join(singular))],
+                                [],
+                            )
+                        else:
+                            yield (
+                                lineno,
+                                None,
+                                smart_text(u''.join(singular)),
+                                [])
 
                     intrans = False
                     inplural = False
+                    message_context = None
                     singular = []
                     plural = []
                 elif pluralmatch:
@@ -93,9 +114,12 @@ def extract_django(fileobj, keywords, comment_tags, options):
                             [smart_text(message_context), smart_text(g)],
                             [],
                         )
+                        message_context = None
                     else:
                         yield lineno, None, smart_text(g), []
                 elif bmatch:
+                    if bmatch.group(2):
+                        message_context = bmatch.group(2)[1:-1]
                     for fmatch in constant_re.findall(t.contents):
                         yield lineno, None, smart_text(fmatch), []
                     intrans = True

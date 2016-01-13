@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import
 
 from babel import support as babel_support
 from babel import core as babel_core

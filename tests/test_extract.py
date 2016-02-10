@@ -8,7 +8,6 @@ from babel._compat import BytesIO
 
 from django_babel.extract import extract_django
 
-
 default_keys = extract.DEFAULT_KEYWORDS.keys()
 
 
@@ -198,4 +197,21 @@ class ExtractDjangoTestCase(unittest.TestCase):
         self.assertEqual(
             [(1, 'npgettext', [u'banana', u'%(foo)s', u'%(bar)s'], [])],
             messages,
+        )
+
+    def test_extract_jinja(self):
+        test_tmpl = (
+            b'{% trans "test1" %}'
+            b"{{ _('test2') }}"
+            b"{% macro label(label) %}"
+            b"  <label>{{ label }}</label>"
+            b"{% endmacro %}"
+            b"{{ label(_('test3')) }}"
+            b"{% call macros.label(_('test4')) %}{% endcall %}"
+        )
+        buf = BytesIO(test_tmpl)
+        messages = list(extract_django(buf, default_keys, [], {}))
+        self.assertEqual(
+            [(1, None, u'test1', []), (1, None, u'test2', []), (1, None, u'test3', []), (1, None, u'test4', [])],
+            messages
         )

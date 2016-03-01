@@ -16,8 +16,8 @@ _thread_locals = local()
 def get_current_locale():
     """Get current locale data outside views.
 
-    See http://babel.pocoo.org/docs/api/core/#babel.core.Locale for Locale
-    objects documentation
+    See http://babel.pocoo.org/en/stable/api/core.html#babel.core.Locale
+    for Locale objects documentation
     """
     return getattr(_thread_locals, 'locale', None)
 

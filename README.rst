@@ -344,7 +344,7 @@ would render **10E5**.
 .. _Babel: http://babel.pocoo.org/
 .. _Django: https://www.djangoproject.com/
 .. _wrapper scripts: https://docs.djangoproject.com/en/dev/topics/i18n/translation/#localization-how-to-create-language-files
-.. _Distutils/Setuptools Integration: http://babel.pocoo.org/docs/setup/
-.. _Date Formatting: http://babel.pocoo.org/docs/dates/
-.. _Number Formatting: http://babel.pocoo.org/docs/numbers/
-.. _Locale: http://babel.pocoo.org/docs/api/core/#babel.core.Locale
+.. _Distutils/Setuptools Integration: http://babel.pocoo.org/en/stable/setup.html
+.. _Date Formatting: http://babel.pocoo.org/en/stable/dates.html
+.. _Number Formatting: http://babel.pocoo.org/en/stable/numbers.html
+.. _Locale: http://babel.pocoo.org/en/stable/api/core.html#babel.core.Locale

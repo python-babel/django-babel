@@ -10,6 +10,12 @@ from django.utils.translation.trans_real import (
 from django.utils.encoding import smart_text
 
 
+def strip_quotes(s):
+    if (s[0] == s[-1]) and s.startswith(("'", '"')):
+        return s[1:-1]
+    return s
+
+
 def extract_django(fileobj, keywords, comment_tags, options):
     """Extract messages from Django template files.
 
@@ -107,10 +113,7 @@ def extract_django(fileobj, keywords, comment_tags, options):
                 cmatches = constant_re.findall(t.contents)
                 if imatch:
                     g = imatch.group(1)
-                    if g[0] == '"':
-                        g = g.strip('"')
-                    elif g[0] == "'":
-                        g = g.strip("'")
+                    g = strip_quotes(g)
                     message_context = imatch.group(3)
                     if message_context:
                         # strip quotes
@@ -128,19 +131,22 @@ def extract_django(fileobj, keywords, comment_tags, options):
                     if bmatch.group(2):
                         message_context = bmatch.group(2)[1:-1]
                     for fmatch in constant_re.findall(t.contents):
-                        yield lineno, None, smart_text(fmatch), []
+                        stripped_fmatch = strip_quotes(fmatch)
+                        yield lineno, None, smart_text(stripped_fmatch), []
                     intrans = True
                     inplural = False
                     singular = []
                     plural = []
                 elif cmatches:
                     for cmatch in cmatches:
-                        yield lineno, None, smart_text(cmatch), []
+                        stripped_cmatch = strip_quotes(cmatch)
+                        yield lineno, None, smart_text(stripped_cmatch), []
             elif t.token_type == TOKEN_VAR:
                 parts = t.contents.split('|')
                 cmatch = constant_re.match(parts[0])
                 if cmatch:
-                    yield lineno, None, smart_text(cmatch.group(1)), []
+                    stripped_cmatch = strip_quotes(cmatch.group(1))
+                    yield lineno, None, smart_text(stripped_cmatch), []
                 for p in parts[1:]:
                     if p.find(':_(') >= 0:
                         p1 = p.split(':', 1)[1]
@@ -148,8 +154,5 @@ def extract_django(fileobj, keywords, comment_tags, options):
                             p1 = p1[1:]
                         if p1[0] == '(':
                             p1 = p1.strip('()')
-                        if p1[0] == "'":
-                            p1 = p1.strip("'")
-                        elif p1[0] == '"':
-                            p1 = p1.strip('"')
+                        p1 = strip_quotes(p1)
                         yield lineno, None, smart_text(p1), []

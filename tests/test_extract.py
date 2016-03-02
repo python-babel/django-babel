@@ -154,17 +154,17 @@ class ExtractDjangoTestCase(unittest.TestCase):
     def test_extract_constant_single_quotes(self):
         buf = BytesIO(b"{{ _('constant') }}")
         messages = list(extract_django(buf, default_keys, [], {}))
-        self.assertEqual([(1, None, u"'constant'", [])], messages)
+        self.assertEqual([(1, None, u'constant', [])], messages)
 
     def test_extract_constant_double_quotes(self):
         buf = BytesIO(b'{{ _("constant") }}')
         messages = list(extract_django(buf, default_keys, [], {}))
-        self.assertEqual([(1, None, u'"constant"', [])], messages)
+        self.assertEqual([(1, None, u'constant', [])], messages)
 
     def test_extract_constant_block(self):
         buf = BytesIO(b'{% _("constant") %}')
         messages = list(extract_django(buf, default_keys, [], {}))
-        self.assertEqual([(1, None, u'"constant"', [])], messages)
+        self.assertEqual([(1, None, u'constant', [])], messages)
 
     def test_extract_constant_in_block(self):
         test_tmpl = (
@@ -173,7 +173,7 @@ class ExtractDjangoTestCase(unittest.TestCase):
         buf = BytesIO(test_tmpl)
         messages = list(extract_django(buf, default_keys, [], {}))
         self.assertEqual(
-            [(1, None, u'"constant"', []), (1, None, u'%(foo)s', [])],
+            [(1, None, u'constant', []), (1, None, u'%(foo)s', [])],
             messages,
         )
 

@@ -5,9 +5,32 @@ except ImportError:
     # Django 1.8 moved most stuff to .base
     from django.template.base import Lexer, TOKEN_TEXT, TOKEN_VAR, TOKEN_BLOCK
 
+try:
+    from django.utils.translation import trim_whitespace as trim_django
+except ImportError:
+    trim_django = False
+
+from django.utils.encoding import smart_text
 from django.utils.translation.trans_real import (
     inline_re, block_re, endblock_re, plural_re, constant_re)
-from django.utils.encoding import smart_text
+
+
+def trim_whitespace(string):
+    """Trim whitespace.
+
+    This is only supported in Django>=1.7. This method help in cases of older
+    Django versions.
+    """
+    if trim_django:
+        return trim_django(string)
+    return string
+
+
+def join_tokens(tokens, trim=False):
+    message = ''.join(tokens)
+    if trim:
+        message = trim_whitespace(message)
+    return message
 
 
 def strip_quotes(s):
@@ -31,6 +54,7 @@ def extract_django(fileobj, keywords, comment_tags, options):
     """
     intrans = False
     inplural = False
+    trimmed = False
     message_context = None
     singular = []
     plural = []
@@ -59,16 +83,16 @@ def extract_django(fileobj, keywords, comment_tags, options):
                                 lineno,
                                 'npgettext',
                                 [smart_text(message_context),
-                                 smart_text(u''.join(singular)),
-                                 smart_text(u''.join(plural))],
+                                 smart_text(join_tokens(singular, trimmed)),
+                                 smart_text(join_tokens(plural, trimmed))],
                                 [],
                             )
                         else:
                             yield (
                                 lineno,
                                 'ngettext',
-                                (smart_text(u''.join(singular)),
-                                 smart_text(u''.join(plural))),
+                                (smart_text(join_tokens(singular, trimmed)),
+                                 smart_text(join_tokens(plural, trimmed))),
                                 [])
                     else:
                         if message_context:
@@ -76,14 +100,14 @@ def extract_django(fileobj, keywords, comment_tags, options):
                                 lineno,
                                 'pgettext',
                                 [smart_text(message_context),
-                                 smart_text(u''.join(singular))],
+                                 smart_text(join_tokens(singular, trimmed))],
                                 [],
                             )
                         else:
                             yield (
                                 lineno,
                                 None,
-                                smart_text(u''.join(singular)),
+                                smart_text(join_tokens(singular, trimmed)),
                                 [])
 
                     intrans = False
@@ -135,6 +159,7 @@ def extract_django(fileobj, keywords, comment_tags, options):
                         yield lineno, None, smart_text(stripped_fmatch), []
                     intrans = True
                     inplural = False
+                    trimmed = 'trimmed' in t.split_contents()
                     singular = []
                     plural = []
                 elif cmatches:

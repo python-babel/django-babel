@@ -6,6 +6,7 @@ import pytest
 from babel.messages import extract
 from babel._compat import BytesIO
 
+import django
 from django_babel.extract import extract_django
 
 
@@ -199,3 +200,21 @@ class ExtractDjangoTestCase(unittest.TestCase):
             [(1, 'npgettext', [u'banana', u'%(foo)s', u'%(bar)s'], [])],
             messages,
         )
+
+    def test_blocktrans_with_whitespace_not_trimmed(self):
+        test_tmpl = (
+            b'{% blocktrans %}\n\tfoo\n\tbar\n{% endblocktrans %}'
+        )
+        buf = BytesIO(test_tmpl)
+        messages = list(extract_django(buf, default_keys, [], {}))
+        self.assertEqual([(4, None, u'\n\tfoo\n\tbar\n', [])], messages)
+
+    @pytest.mark.skipif(django.VERSION < (1, 7),
+                        reason='Trimmed whitespace is a Django >= 1.7 feature')
+    def test_blocktrans_with_whitespace_trimmed(self):
+        test_tmpl = (
+            b'{% blocktrans trimmed %}\n\tfoo\n\tbar\n{% endblocktrans %}'
+        )
+        buf = BytesIO(test_tmpl)
+        messages = list(extract_django(buf, default_keys, [], {}))
+        self.assertEqual([(4, None, u'foo bar', [])], messages)

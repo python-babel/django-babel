@@ -1,6 +1,14 @@
 Changelog
 =========
 
+0.5.1 - 2016-03-30
+------------------
+
+* make imports absolute in babel templatetags
+* strip quotes from translations via _()
+* fix links in docs
+* Add support for "trimmed" blocktrans content
+
 0.5.0 - 2016-02-29
 ------------------
 

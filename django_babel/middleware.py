@@ -2,10 +2,7 @@
 
 from babel import Locale, UnknownLocaleError
 from django.utils.translation import get_language
-try:
-    from threading import local
-except ImportError:
-    from django.utils._threading_local import local
+from threading import local
 
 
 __all__ = ['get_current_locale', 'LocaleMiddleware']

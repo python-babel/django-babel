@@ -1,4 +1,5 @@
-{% load babel %}
+{% load i18n babel %}
+text={% trans "This could be translated." %}
 language_code={{ LANGUAGE_CODE }}
 language_name={{ locale.language_name }}
 date={{ date|datefmt }}

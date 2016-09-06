@@ -1,3 +1,5 @@
+import os
+
 SECRET_KEY = 'x'
 USE_I18N = True
 ROOT_URLCONF = 'tests.urls'
@@ -20,4 +22,7 @@ TEMPLATES = [
             ],
         },
     },
+]
+LOCALE_PATHS = [
+    os.path.join(os.path.dirname(__file__), 'locale'),
 ]

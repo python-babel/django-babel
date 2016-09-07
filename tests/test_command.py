@@ -1,11 +1,9 @@
 import os
 
+import pkg_resources
 from django.core.management import call_command
 
-TEST_LOCALE_DIR = os.path.join(
-    os.path.dirname(__file__),
-    'locale',
-)
+TEST_LOCALE_DIR = pkg_resources.resource_filename('testproject', 'locale')
 
 
 def test_babel_compilemessages():
@@ -25,7 +23,7 @@ def test_babel_makemessages():
         'babel',
         'makemessages',
         '-l', 'en',
-        '-F', os.path.join(os.path.dirname(__file__), 'babel.cfg'),
+        '-F', pkg_resources.resource_filename(__name__, 'babel.cfg'),
     )
     # See that the expected files get populated with the discovered message
     for path in [

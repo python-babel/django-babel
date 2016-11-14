@@ -3,7 +3,9 @@ import os
 import pkg_resources
 from django.core.management import call_command
 
-TEST_LOCALE_DIR = pkg_resources.resource_filename('testproject', 'locale')
+TEST_LOCALE_DIR = pkg_resources.resource_filename(
+    'tests.testproject', 'locale'
+)
 
 
 def test_babel_compilemessages():

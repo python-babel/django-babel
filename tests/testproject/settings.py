@@ -2,10 +2,10 @@ import pkg_resources
 
 SECRET_KEY = 'x'
 USE_I18N = True
-ROOT_URLCONF = 'testproject.urls'
+ROOT_URLCONF = 'tests.testproject.urls'
 INSTALLED_APPS = [
     'django_babel',
-    'testproject',
+    'tests.testproject',
 ]
 MIDDLEWARE_CLASSES = [
     'django.middleware.locale.LocaleMiddleware',

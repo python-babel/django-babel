@@ -4,7 +4,7 @@ import pkg_resources
 from django.core.management import call_command
 
 TEST_LOCALE_DIR = pkg_resources.resource_filename(
-    'tests.testproject', 'locale'
+    'testproject', 'locale'
 )
 
 

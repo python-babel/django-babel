@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
 from distutils.dist import Distribution
-from optparse import make_option
 from subprocess import call
 
 from django.core.management.base import LabelCommand, CommandError
@@ -15,23 +14,23 @@ class Command(LabelCommand):
 
     args = '[makemessages] [compilemessages]'
 
-    option_list = LabelCommand.option_list + (
-        make_option(
-            '--locale', '-l', default=None, dest='locale', action='append',
+    def add_arguments(self, parser):
+        super(Command, self).add_arguments(parser)
+        parser.add_argument(
+            '--locale', '-l', default=[], dest='locale', action='append',
             help=(
                 'Creates or updates the message files for the given locale(s)'
                 ' (e.g pt_BR). Can be used multiple times.'
             ),
-        ),
-        make_option(
+        )
+        parser.add_argument(
             '--domain', '-d', default='django', dest='domain',
             help='The domain of the message files (default: "django").',
         ),
-        make_option(
+        parser.add_argument(
             '--mapping-file', '-F', default=None, dest='mapping_file',
             help='Mapping file',
         )
-    )
 
     def handle_label(self, command, **options):
         if command not in ('makemessages', 'compilemessages'):

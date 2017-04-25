@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.6.0 - 2017-04-25
+------------------
+
+* compatibility with unsupported Django versions (<1.8) is dropped
+* compatibility with Django 1.10+ middlewares was added
+
 0.5.1 - 2016-03-30
 ------------------
 

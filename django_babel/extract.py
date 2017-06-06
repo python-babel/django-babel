@@ -1,35 +1,15 @@
 # -*- coding: utf-8 -*-
-try:
-    from django.template import Lexer, TOKEN_TEXT, TOKEN_VAR, TOKEN_BLOCK
-except ImportError:
-    # Django 1.8 moved most stuff to .base
-    from django.template.base import Lexer, TOKEN_TEXT, TOKEN_VAR, TOKEN_BLOCK
-
-try:
-    from django.utils.translation import trim_whitespace as trim_django
-except ImportError:
-    trim_django = False
-
+from django.template.base import Lexer, TOKEN_TEXT, TOKEN_VAR, TOKEN_BLOCK
+from django.utils.translation import trim_whitespace
 from django.utils.encoding import smart_text
 
 try:
-    from django.utils.translation.trans_real import (
-        inline_re, block_re, endblock_re, plural_re, constant_re)
+   from django.utils.translation.trans_real import (
+      inline_re, block_re, endblock_re, plural_re, constant_re)
 except ImportError:
-    # Django 1.11+
-    from django.utils.translation.template import (
-        inline_re, block_re, endblock_re, plural_re, constant_re)
-
-
-def trim_whitespace(string):
-    """Trim whitespace.
-
-    This is only supported in Django>=1.7. This method help in cases of older
-    Django versions.
-    """
-    if trim_django:
-        return trim_django(string)
-    return string
+   # Django 1.11+
+   from django.utils.translation.template import (
+      inline_re, block_re, endblock_re, plural_re, constant_re)
 
 
 def join_tokens(tokens, trim=False):

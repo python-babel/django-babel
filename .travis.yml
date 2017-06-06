@@ -10,9 +10,9 @@ python:
 
 matrix:
    include:
-      - env: TOX_ENV=docs
+      - env: TOXENV=docs
         python: '3.6'
-      - env: TOX_ENV=lint
+      - env: TOXENV=lint
         python: '3.6'
   
 install:

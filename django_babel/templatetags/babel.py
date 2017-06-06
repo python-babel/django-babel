@@ -32,41 +32,41 @@ def _get_format():
     return babel_support.Format(locale, tzinfo)
 
 
+@register.filter
 def datefmt(date=None, format='medium'):
     return _get_format().date(date, format=format)
-datefmt = register.filter(datefmt)
 
 
+@register.filter
 def datetimefmt(datetime=None, format='medium'):
     return _get_format().datetime(datetime, format=format)
-datetimefmt = register.filter(datetimefmt)
 
 
+@register.filter
 def timefmt(time=None, format='medium'):
     return _get_format().time(time, format=format)
-timefmt = register.filter(timefmt)
 
 
+@register.filter
 def numberfmt(number):
     return _get_format().number(number)
-numberfmt = register.filter(numberfmt)
 
 
+@register.filter
 def decimalfmt(number, format=None):
     return _get_format().decimal(number, format=format)
-decimalfmt = register.filter(decimalfmt)
 
 
+@register.filter
 def currencyfmt(number, currency):
     return _get_format().currency(number, currency)
-currencyfmt = register.filter(currencyfmt)
 
 
+@register.filter
 def percentfmt(number, format=None):
     return _get_format().percent(number, format=format)
-percentfmt = register.filter(percentfmt)
 
 
+@register.filter
 def scientificfmt(number):
     return _get_format().scientific(number)
-scientificfmt = register.filter(scientificfmt)

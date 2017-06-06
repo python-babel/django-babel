@@ -1,22 +1,21 @@
 language: python
-python: 3.4
 sudo: false
-env:
-  - TOX_ENV=docs
-  - TOX_ENV=lint
-  - TOX_ENV=py27-django18
-  - TOX_ENV=py27-django19
-  - TOX_ENV=py27-django110
-  - TOX_ENV=py27-djangomaster
-  - TOX_ENV=py33-django18
-  - TOX_ENV=py34-django18
-  - TOX_ENV=py34-django19
-  - TOX_ENV=py34-django110
-  - TOX_ENV=py34-djangomaster
+cache: pip
+
+python:
+   - '2.7'
+   - '3.4'
+   - '3.5'
+   - '3.6'
+
+matrix:
+   include:
+      - env: TOXENV=docs
+        python: '3.6'
+      - env: TOXENV=lint
+        python: '3.6'
+  
 install:
-- pip install tox
+- pip install tox tox-travis
 script:
-- tox -e $TOX_ENV
-cache:
-  directories:
-    - $HOME/.cache/pip
+- tox

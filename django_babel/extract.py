@@ -20,6 +20,7 @@ except ImportError:
     from django.utils.translation.template import (
         inline_re, block_re, endblock_re, plural_re, constant_re)
 
+
 def trim_whitespace(string):
     """Trim whitespace.
 

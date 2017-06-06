@@ -4,12 +4,12 @@ from django.utils.translation import trim_whitespace
 from django.utils.encoding import smart_text
 
 try:
-   from django.utils.translation.trans_real import (
-      inline_re, block_re, endblock_re, plural_re, constant_re)
+    from django.utils.translation.trans_real import (
+        inline_re, block_re, endblock_re, plural_re, constant_re)
 except ImportError:
-   # Django 1.11+
-   from django.utils.translation.template import (
-      inline_re, block_re, endblock_re, plural_re, constant_re)
+    # Django 1.11+
+    from django.utils.translation.template import (
+        inline_re, block_re, endblock_re, plural_re, constant_re)
 
 
 def join_tokens(tokens, trim=False):

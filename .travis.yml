@@ -1,5 +1,4 @@
 language: python
-python: 3.6
 sudo: false
 cache: pip
 
@@ -11,15 +10,12 @@ python:
 
 matrix:
    include:
-      - TOX_ENV=docs
+      - env: TOX_ENV=docs
         python: '3.6'
-      - TOX_ENV=lint
+      - env: TOX_ENV=lint
         python: '3.6'
   
 install:
 - pip install tox tox-travis
 script:
 - tox -e $TOX_ENV
-cache:
-  directories:
-    - $HOME/.cache/pip

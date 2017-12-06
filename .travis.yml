@@ -10,7 +10,6 @@ env:
   - TOX_ENV=py27-django19
   - TOX_ENV=py27-django110
   - TOX_ENV=py27-django111
-  - TOX_ENV=py33-django18
   - TOX_ENV=py34-django18
   - TOX_ENV=py34-django19
   - TOX_ENV=py34-django110
@@ -25,6 +24,8 @@ env:
   - TOX_ENV=py35-djangomaster
 matrix:
   include:
+    - env: TOX_ENV=py33-django18
+      python: "3.3"
     - env: TOX_ENV=py36-django18
       python: "3.6"
     - env: TOX_ENV=py36-django19

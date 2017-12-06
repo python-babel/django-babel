@@ -4,6 +4,8 @@ sudo: false
 env:
   - TOX_ENV=docs
   - TOX_ENV=lint
+  # Django support for different python versions reference
+  # https://docs.djangoproject.com/en/dev/faq/install/#faq-python-version-support
   - TOX_ENV=py27-django18
   - TOX_ENV=py27-django19
   - TOX_ENV=py27-django110
@@ -13,11 +15,13 @@ env:
   - TOX_ENV=py34-django19
   - TOX_ENV=py34-django110
   - TOX_ENV=py34-django111
+  - TOX_ENV=py34-django200
   - TOX_ENV=py34-djangomaster
   - TOX_ENV=py35-django18
   - TOX_ENV=py35-django19
   - TOX_ENV=py35-django110
   - TOX_ENV=py35-django111
+  - TOX_ENV=py35-django200
   - TOX_ENV=py35-djangomaster
 matrix:
   include:

@@ -10,7 +10,7 @@ python:
 env:
     - DJANGO=1.8
     - DJANGO=1.9
-readabilityO=1.10
+    - DJANGO=1.10
     - DJANGO=1.11
     - DJANGO=2.0
     - DJANGO=master

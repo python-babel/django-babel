@@ -1,40 +1,40 @@
 language: python
-python: 3.5
 sudo: false
+
+python:
+    - "3.6"
+    - "3.5"
+    - "3.4"
+    - "2.7"
+
 env:
-  - TOX_ENV=docs
-  - TOX_ENV=lint
-  # Django support for different python versions reference
-  # https://docs.djangoproject.com/en/dev/faq/install/#faq-python-version-support
-  - TOX_ENV=py27-django18
-  - TOX_ENV=py27-django19
-  - TOX_ENV=py27-django110
-  - TOX_ENV=py27-django111
-  - TOX_ENV=py34-django18
-  - TOX_ENV=py34-django19
-  - TOX_ENV=py34-django110
-  - TOX_ENV=py34-django111
-  - TOX_ENV=py34-django200
-  - TOX_ENV=py34-djangomaster # py34 this will become unsupported for 2.1
-  - TOX_ENV=py35-django18
-  - TOX_ENV=py35-django19
-  - TOX_ENV=py35-django110
-  - TOX_ENV=py35-django111
-  - TOX_ENV=py35-django200
-  - TOX_ENV=py35-djangomaster
-  - TOX_ENV=py36-django111
-  - TOX_ENV=py36-django200
-  - TOX_ENV=py36-djangomaster
+    - DJANGO=1.8
+    - DJANGO=1.9
+readabilityO=1.10
+    - DJANGO=1.11
+    - DJANGO=2.0
+    - DJANGO=master
+
 matrix:
-  include:
-    - env: TOX_ENV=py33-django18
-      python: "3.3"
-    - env: TOX_ENV=py36-django111
-      python: "3.6"
-    - env: TOX_ENV=py36-django200
-      python: "3.6"
-    - env: TOX_ENV=py36-djangomaster
-      python: "3.6"
+    include:
+      - { python: "3.3", env: TOX_ENV=py33-django-18 }
+      - { python: "3.5", env: TOXENV=lint }
+      - { python: "3.5", env: TOXENV=docs }
+      - { python: "3.7", env: TOX_ENV=py37-django-master }
+
+    exclude:
+      # Django support for different python versions reference
+      # https://docs.djangoproject.com/en/dev/faq/install/#faq-python-version-support
+      - { python: "2.7", env: DJANGO=2.0 }
+      - { python: "2.7", env: DJANGO=master }
+      - { python: "3.4", env: DJANGO=master } # py34 this will become unsupported for 2.1
+      - { python: "3.6", env: DJANGO=1.9 }
+      - { python: "3.6", env: DJANGO=1.10 }
+
+    allow_failures:
+      - python: "3.7"
+      - env: DJANGO=master
+
 install: pip install tox
 script: tox -e $TOX_ENV
 cache: pip

@@ -15,23 +15,20 @@ env:
   - TOX_ENV=py34-django110
   - TOX_ENV=py34-django111
   - TOX_ENV=py34-django200
-  - TOX_ENV=py34-djangomaster
+  - TOX_ENV=py34-djangomaster # py34 this will become unsupported for 2.1
   - TOX_ENV=py35-django18
   - TOX_ENV=py35-django19
   - TOX_ENV=py35-django110
   - TOX_ENV=py35-django111
   - TOX_ENV=py35-django200
   - TOX_ENV=py35-djangomaster
+  - TOX_ENV=py36-django111
+  - TOX_ENV=py36-django200
+  - TOX_ENV=py36-djangomaster
 matrix:
   include:
     - env: TOX_ENV=py33-django18
       python: "3.3"
-    - env: TOX_ENV=py36-django18
-      python: "3.6"
-    - env: TOX_ENV=py36-django19
-      python: "3.6"
-    - env: TOX_ENV=py36-django110
-      python: "3.6"
     - env: TOX_ENV=py36-django111
       python: "3.6"
     - env: TOX_ENV=py36-django200

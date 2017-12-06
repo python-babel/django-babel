@@ -34,6 +34,8 @@ matrix:
       python: "3.6"
     - env: TOX_ENV=py36-django111
       python: "3.6"
+    - env: TOX_ENV=py36-django200
+      python: "3.6"
     - env: TOX_ENV=py36-djangomaster
       python: "3.6"
 install: pip install tox

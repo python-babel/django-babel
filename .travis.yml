@@ -35,6 +35,6 @@ matrix:
       - python: "3.7"
       - env: DJANGO=master
 
-install: pip install tox
-script: tox -e $TOX_ENV
+install: pip install tox tox-travis
+script: tox
 cache: pip

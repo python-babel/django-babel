@@ -9,8 +9,6 @@ python:
 
 env:
     - DJANGO=1.8
-    - DJANGO=1.9
-    - DJANGO=1.10
     - DJANGO=1.11
     - DJANGO=2.0
     - DJANGO=master
@@ -27,8 +25,6 @@ matrix:
       - { python: "2.7", env: DJANGO=2.0 }
       - { python: "2.7", env: DJANGO=master }
       - { python: "3.4", env: DJANGO=master } # py34 this will become unsupported for 2.1
-      - { python: "3.6", env: DJANGO=1.9 }
-      - { python: "3.6", env: DJANGO=1.10 }
 
 install: pip install tox tox-travis
 script: tox

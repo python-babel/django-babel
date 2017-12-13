@@ -7,10 +7,11 @@ INSTALLED_APPS = [
     'django_babel',
     'testproject',
 ]
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'django.middleware.locale.LocaleMiddleware',
     'django_babel.middleware.LocaleMiddleware',
 ]
+MIDDLEWARE_CLASSES = MIDDLEWARE  # backwards compat
 TEMPLATES = [
     {
         'NAME': 'default',

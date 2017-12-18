@@ -4,7 +4,7 @@ Changelog
 0.6.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- compatibility with Django 2.0 added
 
 
 0.6.1 (2017-12-18)

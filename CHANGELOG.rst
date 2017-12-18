@@ -1,7 +1,13 @@
 Changelog
 =========
 
-0.6.1 - 2017-07-20
+0.6.2 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+0.6.1 (2017-12-18)
 ------------------
 
 * compatibility with Django 1.11 added

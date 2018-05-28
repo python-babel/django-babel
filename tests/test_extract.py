@@ -218,3 +218,33 @@ class ExtractDjangoTestCase(unittest.TestCase):
         buf = BytesIO(test_tmpl)
         messages = list(extract_django(buf, default_keys, [], {}))
         self.assertEqual([(4, None, u'foo bar', [])], messages)
+
+    @pytest.mark.skipif(django.VERSION >= (1, 9),
+                        reason='%-sign escaping changed in django 1.9')
+    def test_extract_trans_percents_old_way(self):
+        """Before Django 1.9, only a signle %-sign was escaped to %%"""
+        buf = BytesIO(b'{% trans "1 %, 2 %%, 3 %%%" %}')
+        messages = list(extract_django(buf, default_keys, [], {}))
+        self.assertEqual([(1, None, u'1 %%, 2 %%, 3 %%%', [])], messages)
+
+    @pytest.mark.skipif(django.VERSION >= (1, 9),
+                        reason='%-sign escaping changed in django 1.9')
+    def test_extract_blocktrans_percents_old_way(self):
+        """Before Django 1.9, only a signle %-sign was escaped to %%"""
+        buf = BytesIO(b'{% blocktrans %}1 %, 2 %%, 3 %%%{% endblocktrans %}')
+        messages = list(extract_django(buf, default_keys, [], {}))
+        self.assertEqual([(1, None, u'1 %%, 2 %%, 3 %%%', [])], messages)
+
+    @pytest.mark.skipif(django.VERSION < (1, 9),
+                        reason='%-sign escaping changed in django 1.9')
+    def test_extract_trans_percents(self):
+        buf = BytesIO(b'{% trans "1 %, 2 %%, 3 %%%" %}')
+        messages = list(extract_django(buf, default_keys, [], {}))
+        self.assertEqual([(1, None, u'1 %%, 2 %%%%, 3 %%%%%%', [])], messages)
+
+    @pytest.mark.skipif(django.VERSION < (1, 9),
+                        reason='%-sign escaping changed in django 1.9')
+    def test_extract_blocktrans_percents(self):
+        buf = BytesIO(b'{% blocktrans %}1 %, 2 %%, 3 %%%{% endblocktrans %}')
+        messages = list(extract_django(buf, default_keys, [], {}))
+        self.assertEqual([(1, None, u'1 %%, 2 %%%%, 3 %%%%%%', [])], messages)

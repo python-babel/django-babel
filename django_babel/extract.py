@@ -11,6 +11,12 @@ except ImportError:
     from django.utils.translation.template import (
         inline_re, block_re, endblock_re, plural_re, constant_re)
 
+try:
+    from django.utils.translation.trans_real import one_percent_re
+except ImportError:
+    # Django 1.9+
+    one_percent_re = None
+
 
 def join_tokens(tokens, trim=False):
     message = ''.join(tokens)
@@ -112,10 +118,14 @@ def extract_django(fileobj, keywords, comment_tags, options):
                 else:
                     singular.append('%%(%s)s' % t.contents)
             elif t.token_type == TOKEN_TEXT:
-                if inplural:
-                    plural.append(t.contents)
+                if one_percent_re:
+                    contents = one_percent_re.sub('%%', t.contents)
                 else:
-                    singular.append(t.contents)
+                    contents = t.contents.replace('%', '%%')
+                if inplural:
+                    plural.append(contents)
+                else:
+                    singular.append(contents)
         else:
             if t.token_type == TOKEN_BLOCK:
                 imatch = inline_re.match(t.contents)
@@ -124,6 +134,10 @@ def extract_django(fileobj, keywords, comment_tags, options):
                 if imatch:
                     g = imatch.group(1)
                     g = strip_quotes(g)
+                    if one_percent_re:
+                        g = one_percent_re.sub('%%', g)
+                    else:
+                        g = g.replace('%', '%%')
                     message_context = imatch.group(3)
                     if message_context:
                         # strip quotes

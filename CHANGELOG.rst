@@ -4,8 +4,9 @@ Changelog
 0.6.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Confirm compatibility with Django 2.2
+- Compatibility with Django 2.1 added.
+  From @tsouvarev work : https://github.com/python-babel/django-babel/pull/45
 
 0.6.2 (2017-12-18)
 ------------------

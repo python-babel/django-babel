@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
+from django.template.base import Lexer
 try:
-    from django.template.base import Lexer, TOKEN_TEXT, TOKEN_VAR, TOKEN_BLOCK
-except ImportError:
-    # Django 2.1+
-    from django.template.base import Lexer, TokenType
-
+    from django.template.base import TokenType
+except ImportError:  # django < 2.1
+    from django.template.base import TOKEN_TEXT, TOKEN_VAR, TOKEN_BLOCK
+else:
     TOKEN_TEXT = TokenType.TEXT
     TOKEN_VAR = TokenType.VAR
     TOKEN_BLOCK = TokenType.BLOCK

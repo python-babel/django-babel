@@ -1,5 +1,14 @@
 # -*- coding: utf-8 -*-
-from django.template.base import Lexer, TOKEN_TEXT, TOKEN_VAR, TOKEN_BLOCK
+from django.template.base import Lexer
+try:
+    from django.template.base import TokenType
+except ImportError:  # django < 2.1
+    from django.template.base import TOKEN_TEXT, TOKEN_VAR, TOKEN_BLOCK
+else:
+    TOKEN_TEXT = TokenType.TEXT
+    TOKEN_VAR = TokenType.VAR
+    TOKEN_BLOCK = TokenType.BLOCK
+
 from django.utils.translation import trim_whitespace
 from django.utils.encoding import smart_text
 

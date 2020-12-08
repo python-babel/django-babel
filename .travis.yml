@@ -33,10 +33,7 @@ matrix:
     - env: TOX_ENV=py36-django20
       arch: ppc64le
       python: "3.6
- 
-
-
 
 install: pip install tox
 script: tox -e $TOX_ENV
-cache: pip
+cache: pip   

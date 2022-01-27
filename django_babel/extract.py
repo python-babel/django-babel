@@ -1,15 +1,12 @@
 # -*- coding: utf-8 -*-
-from django.template.base import Lexer, TOKEN_TEXT, TOKEN_VAR, TOKEN_BLOCK
+from django.template.base import Lexer, TokenType
 from django.utils.translation import trim_whitespace
 from django.utils.encoding import smart_text
+from django.utils.translation.template import inline_re, block_re, endblock_re, plural_re, constant_re
 
-try:
-    from django.utils.translation.trans_real import (
-        inline_re, block_re, endblock_re, plural_re, constant_re)
-except ImportError:
-    # Django 1.11+
-    from django.utils.translation.template import (
-        inline_re, block_re, endblock_re, plural_re, constant_re)
+TOKEN_TEXT = TokenType.TEXT
+TOKEN_VAR = TokenType.VAR
+TOKEN_BLOCK = TokenType.BLOCK
 
 
 def join_tokens(tokens, trim=False):
@@ -48,13 +45,7 @@ def extract_django(fileobj, keywords, comment_tags, options):
 
     encoding = options.get('encoding', 'utf8')
     text = fileobj.read().decode(encoding)
-
-    try:
-        text_lexer = Lexer(text)
-    except TypeError:
-        # Django 1.9 changed the way we invoke Lexer; older versions
-        # require two parameters.
-        text_lexer = Lexer(text, None)
+    text_lexer = Lexer(text)
 
     for t in text_lexer.tokenize():
         lineno += t.contents.count('\n')

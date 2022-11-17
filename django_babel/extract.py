@@ -122,7 +122,7 @@ def extract_django(fileobj, keywords, comment_tags, options):
                         yield (
                             lineno,
                             'pgettext',
-                            [smart_str(message_context), smart_text(g)],
+                            [smart_str(message_context), smart_str(g)],
                             [],
                         )
                         message_context = None

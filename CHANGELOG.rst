@@ -1,10 +1,15 @@
 Changelog
 =========
 
-0.6.3 (unreleased)
+0.6.4 (2022-11-17)
 ------------------
 
-- Nothing changed yet.
+- compatibility with Django 4.0 added
+
+0.6.3 (2022-01-27)
+------------------
+
+- compatibility with Django 3.0 added
 
 
 0.6.2 (2017-12-18)
